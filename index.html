@@ -246,11 +246,11 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        // CONFIGURACIÓN DE TU NÚMERO DE WHATSAPP (Formato Internacional sin el +)
-        const MY_PHONE_NUMBER = "584246041002"; // Cambia esto por tu número real
+        // CONFIGURACIÓN DE TU NÚMERO DE WHATSAPP (Reemplaza con tu número real)
+        const MY_PHONE_NUMBER = "584120000000"; 
 
-        // Tasa del dólar aproximada para VES
-        const EXCHANGE_RATE_VES = 68.50; 
+        // Tasa BCV Oficial actual (puedes actualizar este número cuando cambie el dólar)
+        const EXCHANGE_RATE_VES = 881.88; 
 
         let selectedCurrency = 'USD';
         let currentPackage = null;
@@ -269,14 +269,14 @@
                 btnUSD.className = 'px-3 py-1 rounded-md transition text-slate-400 hover:text-white';
             }
 
-            // Update prices
+            // Update prices on cards
             document.querySelectorAll('.price-tag').forEach(el => {
                 const usd = parseFloat(el.getAttribute('data-usd'));
                 if (curr === 'USD') {
                     el.innerText = `$${usd.toFixed(2)} USD`;
                 } else {
                     const ves = usd * EXCHANGE_RATE_VES;
-                    el.innerText = `${ves.toFixed(2)} VES`;
+                    el.innerText = `${ves.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})} Bs`;
                 }
             });
 
@@ -303,4 +303,82 @@
 
         function selectPackage(element, id, priceUsd, title) {
             document.querySelectorAll('.package-card').forEach(card => {
-                card.classList.remove
+                card.classList.remove('border-amber-500', 'bg-slate-800', 'glow-effect');
+                card.classList.add('border-slate-700/80', 'bg-slate-900/80');
+            });
+
+            element.classList.remove('border-slate-700/80', 'bg-slate-900/80');
+            element.classList.add('border-amber-500', 'bg-slate-800', 'glow-effect');
+
+            currentPackage = { id, priceUsd, title };
+            updateSummary();
+        }
+
+        function selectPayment(element, method) {
+            document.querySelectorAll('.payment-card').forEach(card => {
+                card.classList.remove('border-amber-500', 'bg-slate-800');
+                card.classList.add('border-slate-700', 'bg-slate-900');
+            });
+
+            element.classList.remove('border-slate-700', 'bg-slate-900');
+            element.classList.add('border-amber-500', 'bg-slate-800');
+
+            currentPayment = method;
+            document.getElementById('summaryPayment').innerText = method;
+        }
+
+        function updateSummary() {
+            const summaryPackage = document.getElementById('summaryPackage');
+            const totalEl = document.getElementById('summaryTotal');
+
+            if (!currentPackage) {
+                summaryPackage.innerText = 'No seleccionado';
+                totalEl.innerText = selectedCurrency === 'USD' ? '$0.00 USD' : '0,00 Bs';
+                return;
+            }
+
+            summaryPackage.innerText = currentPackage.title;
+
+            if (selectedCurrency === 'USD') {
+                totalEl.innerText = `$${currentPackage.priceUsd.toFixed(2)} USD`;
+            } else {
+                const ves = currentPackage.priceUsd * EXCHANGE_RATE_VES;
+                totalEl.innerText = `${ves.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})} Bs`;
+            }
+        }
+
+        function sendOrder() {
+            const playerId = document.getElementById('playerId').value.trim();
+
+            if (!playerId || playerId.length < 6) {
+                alert('Por favor, ingresa y verifica tu ID de Jugador primero.');
+                return;
+            }
+
+            if (!currentPackage) {
+                alert('Por favor, selecciona un paquete de diamantes.');
+                return;
+            }
+
+            if (!currentPayment) {
+                alert('Por favor, selecciona un método de pago.');
+                return;
+            }
+
+            const totalAmount = selectedCurrency === 'USD' 
+                ? `$${currentPackage.priceUsd.toFixed(2)} USD` 
+                : `${(currentPackage.priceUsd * EXCHANGE_RATE_VES).toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})} Bs`;
+
+            const message = `👋 *NUEVO PEDIDO - FLASH TOPUP*\n\n` +
+                `🎮 *ID Jugador:* ${playerId}\n` +
+                `💎 *Paquete:* ${currentPackage.title}\n` +
+                `💳 *Método de Pago:* ${currentPayment}\n` +
+                `💰 *Total a Pagar:* ${totalAmount}\n\n` +
+                `_Hola, quiero concretar mi recarga de diamantes._`;
+
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/${MY_PHONE_NUMBER}?text=${encodedMessage}`, '_blank');
+        }
+    </script>
+</body>
+</html>
