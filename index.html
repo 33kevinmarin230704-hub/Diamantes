@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" class="dark">
+<html lang="es" class="dark" style="scroll-behavior: smooth;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -72,12 +72,12 @@
             <div class="relative z-10 max-w-lg">
                 <span class="bg-black/20 text-black text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2 inline-block">Recargas Seguras por ID</span>
                 <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight leading-tight">¡Diamantes al Instante para Free Fire!</h2>
-                <p class="text-sm font-medium mt-1 opacity-90">Ingresa tu ID, elige tu paquete, paga con Pago Móvil o Binance y recibe tus diamantes directo en tu cuenta.</p>
+                <p class="text-sm font-medium mt-1 opacity-90">Ingresa tu ID, elige tu paquete, realiza tu pago y envía la captura por WhatsApp.</p>
             </div>
         </div>
 
         <!-- STEP 1: PLAYER ID INPUT & VERIFICATION -->
-        <section class="bg-gaming-card rounded-2xl p-5 border border-slate-800 shadow-md">
+        <section id="step1" class="bg-gaming-card rounded-2xl p-5 border border-slate-800 shadow-md">
             <div class="flex items-center justify-between mb-3">
                 <h3 class="font-bold text-base flex items-center gap-2 text-white">
                     <span class="w-7 h-7 rounded-full bg-amber-500 text-black text-xs font-extrabold flex items-center justify-center">1</span>
@@ -90,15 +90,15 @@
                 <div class="relative flex-grow">
                     <input type="number" id="playerId" placeholder="Ejemplo: 123456789" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 text-sm font-medium transition">
                 </div>
-                <button onclick="verifyId()" class="bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 font-semibold px-5 py-3 rounded-xl text-sm transition flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-user-check text-amber-500"></i> Verificar ID
+                <button onclick="verifyId()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-5 py-3 rounded-xl text-sm transition flex items-center justify-center gap-2 shadow">
+                    <i class="fa-solid fa-user-check"></i> Verificar ID
                 </button>
             </div>
             <p id="idStatus" class="text-xs mt-2 hidden font-medium"></p>
         </section>
 
         <!-- STEP 2: SELECT DIAMOND PACKAGE -->
-        <section class="bg-gaming-card rounded-2xl p-5 border border-slate-800 shadow-md">
+        <section id="step2" class="bg-gaming-card rounded-2xl p-5 border border-slate-800 shadow-md">
             <h3 class="font-bold text-base flex items-center gap-2 text-white mb-4">
                 <span class="w-7 h-7 rounded-full bg-amber-500 text-black text-xs font-extrabold flex items-center justify-center">2</span>
                 Selecciona tu Paquete de Diamantes
@@ -169,46 +169,49 @@
         </section>
 
         <!-- STEP 3: PAYMENT METHOD -->
-        <section class="bg-gaming-card rounded-2xl p-5 border border-slate-800 shadow-md">
+        <section id="step3" class="bg-gaming-card rounded-2xl p-5 border border-slate-800 shadow-md">
             <h3 class="font-bold text-base flex items-center gap-2 text-white mb-4">
                 <span class="w-7 h-7 rounded-full bg-amber-500 text-black text-xs font-extrabold flex items-center justify-center">3</span>
                 Método de Pago
             </h3>
 
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <label onclick="selectPayment(this, 'Pago Móvil BDV')" class="payment-card cursor-pointer bg-slate-900 border-2 border-slate-700 hover:border-amber-500/50 p-3 rounded-xl flex items-center gap-3 transition">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <!-- Pago Móvil -->
+                <label onclick="selectPayment(this, 'Pago Móvil')" class="payment-card cursor-pointer bg-slate-900 border-2 border-slate-700 hover:border-amber-500/50 p-4 rounded-xl flex items-center gap-3 transition">
                     <input type="radio" name="payment" class="hidden">
-                    <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white text-sm font-bold">PM</div>
+                    <div class="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center text-white text-base font-bold shadow">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                    </div>
                     <div>
-                        <p class="text-xs font-bold text-white">Pago Móvil</p>
-                        <p class="text-[10px] text-slate-400">Bs. Tasa Oficial</p>
+                        <p class="text-sm font-bold text-white">Pago Móvil</p>
+                        <p class="text-xs text-slate-400">Banco de Venezuela (Tasa BCV)</p>
                     </div>
                 </label>
 
-                <label onclick="selectPayment(this, 'Binance Pay (USDT)')" class="payment-card cursor-pointer bg-slate-900 border-2 border-slate-700 hover:border-amber-500/50 p-3 rounded-xl flex items-center gap-3 transition">
+                <!-- Binance Pay -->
+                <label onclick="selectPayment(this, 'Binance Pay')" class="payment-card cursor-pointer bg-slate-900 border-2 border-slate-700 hover:border-amber-500/50 p-4 rounded-xl flex items-center gap-3 transition">
                     <input type="radio" name="payment" class="hidden">
-                    <div class="w-8 h-8 rounded-lg bg-yellow-500 flex items-center justify-center text-black text-sm font-bold">
+                    <div class="w-10 h-10 rounded-lg bg-yellow-500 flex items-center justify-center text-black text-base font-bold shadow">
                         <i class="fa-solid fa-coins"></i>
                     </div>
                     <div>
-                        <p class="text-xs font-bold text-white">Binance Pay</p>
-                        <p class="text-[10px] text-slate-400">USDT Sin Comisión</p>
+                        <p class="text-sm font-bold text-white">Binance Pay</p>
+                        <p class="text-xs text-slate-400">Pay ID (USDT)</p>
                     </div>
                 </label>
+            </div>
 
-                <label onclick="selectPayment(this, 'Zinli / Tarjeta')" class="payment-card cursor-pointer bg-slate-900 border-2 border-slate-700 hover:border-amber-500/50 p-3 rounded-xl flex items-center gap-3 transition">
-                    <input type="radio" name="payment" class="hidden">
-                    <div class="w-8 h-8 rounded-lg bg-purple-600 flex items-center justify-center text-white text-sm font-bold">Z</div>
-                    <div>
-                        <p class="text-xs font-bold text-white">Zinli / Tarjeta</p>
-                        <p class="text-[10px] text-slate-400">USD Digital</p>
-                    </div>
-                </label>
+            <!-- PAYMENT DETAILS BOX (DISPLAYED DYNAMICALLY) -->
+            <div id="paymentDetails" class="mt-4 p-4 rounded-xl bg-slate-900 border border-amber-500/30 hidden">
+                <h4 id="paymentDetailsTitle" class="text-xs font-bold text-amber-500 uppercase tracking-wider mb-2">Datos para transferir:</h4>
+                <div id="paymentDetailsContent" class="text-xs text-slate-300 space-y-1 font-mono">
+                    <!-- Dynamic details loaded by JS -->
+                </div>
             </div>
         </section>
 
         <!-- STEP 4: ORDER SUMMARY & SUBMIT -->
-        <section class="bg-slate-900 rounded-2xl p-5 border border-slate-800 shadow-lg">
+        <section id="step4" class="bg-slate-900 rounded-2xl p-5 border border-slate-800 shadow-lg">
             <h3 class="font-bold text-base text-white mb-3">Resumen del Pedido</h3>
             
             <div class="space-y-2 text-sm border-b border-slate-800 pb-3 mb-4">
@@ -232,9 +235,11 @@
 
             <!-- WhatsApp Order Button -->
             <button onclick="sendOrder()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black py-4 rounded-xl shadow-lg glow-green transition flex items-center justify-center gap-2 text-base">
-                <i class="fa-brands fa-whatsapp text-xl"></i> PROCESAR PEDIDO POR WHATSAPP
+                <i class="fa-brands fa-whatsapp text-xl"></i> ENVIAR PEDIDO Y CAPTURA POR WHATSAPP
             </button>
-            <p class="text-[11px] text-slate-500 text-center mt-2">Serás redirigido a WhatsApp para concretar el pago y recibir la recarga.</p>
+            <p class="text-[11px] text-slate-400 text-center mt-2 flex items-center justify-center gap-1">
+                <i class="fa-solid fa-paperclip text-amber-500"></i> Recuerda adjuntar tu comprobante de pago en el chat.
+            </p>
         </section>
 
     </main>
@@ -249,8 +254,20 @@
         // CONFIGURACIÓN DE TU NÚMERO DE WHATSAPP (Reemplaza con tu número real)
         const MY_PHONE_NUMBER = "584120000000"; 
 
-        // Tasa BCV Oficial actual (puedes actualizar este número cuando cambie el dólar)
+        // Tasa BCV Oficial actual
         const EXCHANGE_RATE_VES = 881.88; 
+
+        // DATOS DE PAGO (CÁMBIALOS POR TUS DATOS REALES)
+        const PAGO_MOVIL_DATA = `
+            <p><span class="text-slate-500">Banco:</span> Banco de Venezuela (0102)</p>
+            <p><span class="text-slate-500">Cédula:</span> V-30.878.012</p>
+            <p><span class="text-slate-500">Teléfono:</span> 04246041002</p>
+        `;
+
+        const BINANCE_DATA = `
+            <p><span class="text-slate-500">Binance Pay ID:</span> 123456789</p>
+            <p><span class="text-slate-500">Email:</span> tu-email@ejemplo.com</p>
+        `;
 
         let selectedCurrency = 'USD';
         let currentPackage = null;
@@ -269,7 +286,6 @@
                 btnUSD.className = 'px-3 py-1 rounded-md transition text-slate-400 hover:text-white';
             }
 
-            // Update prices on cards
             document.querySelectorAll('.price-tag').forEach(el => {
                 const usd = parseFloat(el.getAttribute('data-usd'));
                 if (curr === 'USD') {
@@ -295,9 +311,14 @@
                 summaryId.innerText = 'No ingresado';
             } else {
                 status.className = 'text-xs mt-2 font-medium text-emerald-400';
-                status.innerText = '✓ ID Válido y Guardado Correctamente';
+                status.innerText = '✓ ID Verificado Exitosamente';
                 status.classList.remove('hidden');
                 summaryId.innerText = idInput;
+
+                // Auto-scroll to Step 2
+                setTimeout(() => {
+                    document.getElementById('step2').scrollIntoView({ behavior: 'smooth' });
+                }, 300);
             }
         }
 
@@ -312,6 +333,11 @@
 
             currentPackage = { id, priceUsd, title };
             updateSummary();
+
+            // Auto-scroll to Step 3
+            setTimeout(() => {
+                document.getElementById('step3').scrollIntoView({ behavior: 'smooth' });
+            }, 300);
         }
 
         function selectPayment(element, method) {
@@ -325,6 +351,22 @@
 
             currentPayment = method;
             document.getElementById('summaryPayment').innerText = method;
+
+            // Show Payment Details Box
+            const detailsBox = document.getElementById('paymentDetails');
+            const detailsContent = document.getElementById('paymentDetailsContent');
+            detailsBox.classList.remove('hidden');
+
+            if (method === 'Pago Móvil') {
+                detailsContent.innerHTML = PAGO_MOVIL_DATA;
+            } else if (method === 'Binance Pay') {
+                detailsContent.innerHTML = BINANCE_DATA;
+            }
+
+            // Auto-scroll to Step 4
+            setTimeout(() => {
+                document.getElementById('step4').scrollIntoView({ behavior: 'smooth' });
+            }, 300);
         }
 
         function updateSummary() {
@@ -352,16 +394,19 @@
 
             if (!playerId || playerId.length < 6) {
                 alert('Por favor, ingresa y verifica tu ID de Jugador primero.');
+                document.getElementById('step1').scrollIntoView({ behavior: 'smooth' });
                 return;
             }
 
             if (!currentPackage) {
                 alert('Por favor, selecciona un paquete de diamantes.');
+                document.getElementById('step2').scrollIntoView({ behavior: 'smooth' });
                 return;
             }
 
             if (!currentPayment) {
                 alert('Por favor, selecciona un método de pago.');
+                document.getElementById('step3').scrollIntoView({ behavior: 'smooth' });
                 return;
             }
 
@@ -374,10 +419,10 @@
                 `💎 *Paquete:* ${currentPackage.title}\n` +
                 `💳 *Método de Pago:* ${currentPayment}\n` +
                 `💰 *Total a Pagar:* ${totalAmount}\n\n` +
-                `_Hola, quiero concretar mi recarga de diamantes._`;
+                `_Hola, ya realicé el pago. Te adjunto la captura del comprobante para recibir mi recarga._`;
 
             const encodedMessage = encodeURIComponent(message);
-            window.open(`https://wa.me/${MY_PHONE_NUMBER}?text=${encodedMessage}`, '_blank');
+            window.open(`https://wa.me/${584246041002}?text=${encodedMessage}`, '_blank');
         }
     </script>
 </body>
