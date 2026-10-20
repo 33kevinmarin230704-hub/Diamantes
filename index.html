@@ -51,12 +51,9 @@
                 </div>
             </div>
             
-            <!-- Currency Toggle -->
-            <div class="flex items-center gap-2">
-                <div class="bg-slate-900 border border-slate-700 rounded-lg p-1 flex text-xs font-semibold">
-                    <button id="btnUSD" onclick="setCurrency('USD')" class="px-3 py-1 rounded-md transition bg-amber-500 text-black shadow">USD ($)</button>
-                    <button id="btnVES" onclick="setCurrency('VES')" class="px-3 py-1 rounded-md transition text-slate-400 hover:text-white">BS (VES)</button>
-                </div>
+            <div class="text-right">
+                <span class="text-[10px] text-slate-400 block font-semibold uppercase tracking-wider">Tasa del día</span>
+                <span id="rateBadge" class="text-xs font-bold text-amber-500 bg-slate-900 border border-slate-700 px-2.5 py-1 rounded-lg">882.00 Bs / $</span>
             </div>
         </div>
     </header>
@@ -110,8 +107,9 @@
                     <i class="fa-solid fa-gem text-3xl text-amber-500 my-2 group-hover:scale-110 transition-transform"></i>
                     <span class="font-extrabold text-white text-base">100 + 10</span>
                     <span class="text-xs text-slate-400 mb-2">Diamantes</span>
-                    <div class="mt-auto pt-2 border-t border-slate-800 w-full">
-                        <span class="text-amber-500 font-bold text-sm price-tag" data-usd="1.10">$1.10 USD</span>
+                    <div class="mt-auto pt-2 border-t border-slate-800 w-full flex flex-col items-center">
+                        <span class="text-amber-500 font-extrabold text-sm">$1.10 USD</span>
+                        <span class="text-[11px] text-slate-400 font-medium price-ves" data-usd="1.10">-- Bs</span>
                     </div>
                 </div>
 
@@ -120,8 +118,9 @@
                     <i class="fa-solid fa-gem text-3xl text-amber-500 my-2 group-hover:scale-110 transition-transform"></i>
                     <span class="font-extrabold text-white text-base">310 + 31</span>
                     <span class="text-xs text-slate-400 mb-2">Diamantes</span>
-                    <div class="mt-auto pt-2 border-t border-slate-800 w-full">
-                        <span class="text-amber-500 font-bold text-sm price-tag" data-usd="3.20">$3.20 USD</span>
+                    <div class="mt-auto pt-2 border-t border-slate-800 w-full flex flex-col items-center">
+                        <span class="text-amber-500 font-extrabold text-sm">$3.20 USD</span>
+                        <span class="text-[11px] text-slate-400 font-medium price-ves" data-usd="3.20">-- Bs</span>
                     </div>
                 </div>
 
@@ -131,8 +130,9 @@
                     <i class="fa-solid fa-gem text-3xl text-amber-500 my-2 group-hover:scale-110 transition-transform"></i>
                     <span class="font-extrabold text-white text-base">520 + 52</span>
                     <span class="text-xs text-slate-400 mb-2">Diamantes</span>
-                    <div class="mt-auto pt-2 border-t border-slate-800 w-full">
-                        <span class="text-amber-500 font-bold text-sm price-tag" data-usd="5.20">$5.20 USD</span>
+                    <div class="mt-auto pt-2 border-t border-slate-800 w-full flex flex-col items-center">
+                        <span class="text-amber-500 font-extrabold text-sm">$5.20 USD</span>
+                        <span class="text-[11px] text-slate-400 font-medium price-ves" data-usd="5.20">-- Bs</span>
                     </div>
                 </div>
 
@@ -141,8 +141,9 @@
                     <i class="fa-solid fa-gem text-3xl text-amber-500 my-2 group-hover:scale-110 transition-transform"></i>
                     <span class="font-extrabold text-white text-base">1060 + 106</span>
                     <span class="text-xs text-slate-400 mb-2">Diamantes</span>
-                    <div class="mt-auto pt-2 border-t border-slate-800 w-full">
-                        <span class="text-amber-500 font-bold text-sm price-tag" data-usd="10.20">$10.20 USD</span>
+                    <div class="mt-auto pt-2 border-t border-slate-800 w-full flex flex-col items-center">
+                        <span class="text-amber-500 font-extrabold text-sm">$10.20 USD</span>
+                        <span class="text-[11px] text-slate-400 font-medium price-ves" data-usd="10.20">-- Bs</span>
                     </div>
                 </div>
 
@@ -151,8 +152,9 @@
                     <i class="fa-solid fa-crown text-3xl text-yellow-400 my-2 group-hover:scale-110 transition-transform"></i>
                     <span class="font-extrabold text-white text-base">Pase Semanal</span>
                     <span class="text-xs text-slate-400 mb-2">450 Dms Valor</span>
-                    <div class="mt-auto pt-2 border-t border-slate-800 w-full">
-                        <span class="text-amber-500 font-bold text-sm price-tag" data-usd="2.30">$2.30 USD</span>
+                    <div class="mt-auto pt-2 border-t border-slate-800 w-full flex flex-col items-center">
+                        <span class="text-amber-500 font-extrabold text-sm">$2.30 USD</span>
+                        <span class="text-[11px] text-slate-400 font-medium price-ves" data-usd="2.30">-- Bs</span>
                     </div>
                 </div>
 
@@ -161,8 +163,9 @@
                     <i class="fa-solid fa-shield-cat text-3xl text-amber-400 my-2 group-hover:scale-110 transition-transform"></i>
                     <span class="font-extrabold text-white text-base">Pase Mensual</span>
                     <span class="text-xs text-slate-400 mb-2">2600 Dms Valor</span>
-                    <div class="mt-auto pt-2 border-t border-slate-800 w-full">
-                        <span class="text-amber-500 font-bold text-sm price-tag" data-usd="10.50">$10.50 USD</span>
+                    <div class="mt-auto pt-2 border-t border-slate-800 w-full flex flex-col items-center">
+                        <span class="text-amber-500 font-extrabold text-sm">$10.50 USD</span>
+                        <span class="text-[11px] text-slate-400 font-medium price-ves" data-usd="10.50">-- Bs</span>
                     </div>
                 </div>
             </div>
@@ -184,7 +187,7 @@
                     </div>
                     <div>
                         <p class="text-sm font-bold text-white">Pago Móvil</p>
-                        <p class="text-xs text-slate-400">Banco de Venezuela (Tasa BCV)</p>
+                        <p class="text-xs text-slate-400">Banco de Venezuela (Bs)</p>
                     </div>
                 </label>
 
@@ -196,12 +199,12 @@
                     </div>
                     <div>
                         <p class="text-sm font-bold text-white">Binance Pay</p>
-                        <p class="text-xs text-slate-400">Pay ID (USDT)</p>
+                        <p class="text-xs text-slate-400">Pay ID / UID (USDT)</p>
                     </div>
                 </label>
             </div>
 
-            <!-- PAYMENT DETAILS BOX (DISPLAYED DYNAMICALLY) -->
+            <!-- PAYMENT DETAILS BOX -->
             <div id="paymentDetails" class="mt-4 p-4 rounded-xl bg-slate-900 border border-amber-500/30 hidden">
                 <h4 id="paymentDetailsTitle" class="text-xs font-bold text-amber-500 uppercase tracking-wider mb-2">Datos para transferir:</h4>
                 <div id="paymentDetailsContent" class="text-xs text-slate-300 space-y-1 font-mono">
@@ -223,207 +226,4 @@
                     <span>Paquete:</span>
                     <span id="summaryPackage" class="text-white font-bold">No seleccionado</span>
                 </div>
-                <div class="flex justify-between text-slate-400">
-                    <span>Método Pago:</span>
-                    <span id="summaryPayment" class="text-white font-bold">No seleccionado</span>
-                </div>
-                <div class="flex justify-between text-slate-400 pt-2 border-t border-slate-800/50 text-base">
-                    <span class="font-bold text-white">Total a Pagar:</span>
-                    <span id="summaryTotal" class="text-amber-500 font-extrabold">$0.00 USD</span>
-                </div>
-            </div>
-
-            <!-- WhatsApp Order Button -->
-            <button onclick="sendOrder()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black py-4 rounded-xl shadow-lg glow-green transition flex items-center justify-center gap-2 text-base">
-                <i class="fa-brands fa-whatsapp text-xl"></i> ENVIAR PEDIDO Y CAPTURA POR WHATSAPP
-            </button>
-            <p class="text-[11px] text-slate-400 text-center mt-2 flex items-center justify-center gap-1">
-                <i class="fa-solid fa-paperclip text-amber-500"></i> Recuerda adjuntar tu comprobante de pago en el chat.
-            </p>
-        </section>
-
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="bg-gaming-card border-t border-slate-800 py-6 text-center text-xs text-slate-500 mt-auto">
-        <p>© 2026 Flash TopUp - Tienda no oficial de Free Fire. Todos los derechos reservados.</p>
-    </footer>
-
-    <!-- JAVASCRIPT LOGIC -->
-    <script>
-        // CONFIGURACIÓN DE TU NÚMERO DE WHATSAPP (Reemplaza con tu número real)
-        const MY_PHONE_NUMBER = "584120000000"; 
-
-        // Tasa BCV Oficial actual
-        const EXCHANGE_RATE_VES = 881.88; 
-
-        // DATOS DE PAGO (CÁMBIALOS POR TUS DATOS REALES)
-        const PAGO_MOVIL_DATA = `
-            <p><span class="text-slate-500">Banco:</span> Banco de Venezuela (0102)</p>
-            <p><span class="text-slate-500">Cédula:</span> V-30.878.012</p>
-            <p><span class="text-slate-500">Teléfono:</span> 04246041002</p>
-        `;
-
-        const BINANCE_DATA = `
-            <p><span class="text-slate-500">Binance Pay ID:</span> 123456789</p>
-            <p><span class="text-slate-500">Email:</span> tu-email@ejemplo.com</p>
-        `;
-
-        let selectedCurrency = 'USD';
-        let currentPackage = null;
-        let currentPayment = null;
-
-        function setCurrency(curr) {
-            selectedCurrency = curr;
-            const btnUSD = document.getElementById('btnUSD');
-            const btnVES = document.getElementById('btnVES');
-
-            if (curr === 'USD') {
-                btnUSD.className = 'px-3 py-1 rounded-md transition bg-amber-500 text-black shadow';
-                btnVES.className = 'px-3 py-1 rounded-md transition text-slate-400 hover:text-white';
-            } else {
-                btnVES.className = 'px-3 py-1 rounded-md transition bg-amber-500 text-black shadow';
-                btnUSD.className = 'px-3 py-1 rounded-md transition text-slate-400 hover:text-white';
-            }
-
-            document.querySelectorAll('.price-tag').forEach(el => {
-                const usd = parseFloat(el.getAttribute('data-usd'));
-                if (curr === 'USD') {
-                    el.innerText = `$${usd.toFixed(2)} USD`;
-                } else {
-                    const ves = usd * EXCHANGE_RATE_VES;
-                    el.innerText = `${ves.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})} Bs`;
-                }
-            });
-
-            updateSummary();
-        }
-
-        function verifyId() {
-            const idInput = document.getElementById('playerId').value.trim();
-            const status = document.getElementById('idStatus');
-            const summaryId = document.getElementById('summaryId');
-
-            if (idInput.length < 6) {
-                status.className = 'text-xs mt-2 font-medium text-red-400';
-                status.innerText = '⚠️ Ingrese un ID válido de Free Fire (mínimo 6 dígitos).';
-                status.classList.remove('hidden');
-                summaryId.innerText = 'No ingresado';
-            } else {
-                status.className = 'text-xs mt-2 font-medium text-emerald-400';
-                status.innerText = '✓ ID Verificado Exitosamente';
-                status.classList.remove('hidden');
-                summaryId.innerText = idInput;
-
-                // Auto-scroll to Step 2
-                setTimeout(() => {
-                    document.getElementById('step2').scrollIntoView({ behavior: 'smooth' });
-                }, 300);
-            }
-        }
-
-        function selectPackage(element, id, priceUsd, title) {
-            document.querySelectorAll('.package-card').forEach(card => {
-                card.classList.remove('border-amber-500', 'bg-slate-800', 'glow-effect');
-                card.classList.add('border-slate-700/80', 'bg-slate-900/80');
-            });
-
-            element.classList.remove('border-slate-700/80', 'bg-slate-900/80');
-            element.classList.add('border-amber-500', 'bg-slate-800', 'glow-effect');
-
-            currentPackage = { id, priceUsd, title };
-            updateSummary();
-
-            // Auto-scroll to Step 3
-            setTimeout(() => {
-                document.getElementById('step3').scrollIntoView({ behavior: 'smooth' });
-            }, 300);
-        }
-
-        function selectPayment(element, method) {
-            document.querySelectorAll('.payment-card').forEach(card => {
-                card.classList.remove('border-amber-500', 'bg-slate-800');
-                card.classList.add('border-slate-700', 'bg-slate-900');
-            });
-
-            element.classList.remove('border-slate-700', 'bg-slate-900');
-            element.classList.add('border-amber-500', 'bg-slate-800');
-
-            currentPayment = method;
-            document.getElementById('summaryPayment').innerText = method;
-
-            // Show Payment Details Box
-            const detailsBox = document.getElementById('paymentDetails');
-            const detailsContent = document.getElementById('paymentDetailsContent');
-            detailsBox.classList.remove('hidden');
-
-            if (method === 'Pago Móvil') {
-                detailsContent.innerHTML = PAGO_MOVIL_DATA;
-            } else if (method === 'Binance Pay') {
-                detailsContent.innerHTML = BINANCE_DATA;
-            }
-
-            // Auto-scroll to Step 4
-            setTimeout(() => {
-                document.getElementById('step4').scrollIntoView({ behavior: 'smooth' });
-            }, 300);
-        }
-
-        function updateSummary() {
-            const summaryPackage = document.getElementById('summaryPackage');
-            const totalEl = document.getElementById('summaryTotal');
-
-            if (!currentPackage) {
-                summaryPackage.innerText = 'No seleccionado';
-                totalEl.innerText = selectedCurrency === 'USD' ? '$0.00 USD' : '0,00 Bs';
-                return;
-            }
-
-            summaryPackage.innerText = currentPackage.title;
-
-            if (selectedCurrency === 'USD') {
-                totalEl.innerText = `$${currentPackage.priceUsd.toFixed(2)} USD`;
-            } else {
-                const ves = currentPackage.priceUsd * EXCHANGE_RATE_VES;
-                totalEl.innerText = `${ves.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})} Bs`;
-            }
-        }
-
-        function sendOrder() {
-            const playerId = document.getElementById('playerId').value.trim();
-
-            if (!playerId || playerId.length < 6) {
-                alert('Por favor, ingresa y verifica tu ID de Jugador primero.');
-                document.getElementById('step1').scrollIntoView({ behavior: 'smooth' });
-                return;
-            }
-
-            if (!currentPackage) {
-                alert('Por favor, selecciona un paquete de diamantes.');
-                document.getElementById('step2').scrollIntoView({ behavior: 'smooth' });
-                return;
-            }
-
-            if (!currentPayment) {
-                alert('Por favor, selecciona un método de pago.');
-                document.getElementById('step3').scrollIntoView({ behavior: 'smooth' });
-                return;
-            }
-
-            const totalAmount = selectedCurrency === 'USD' 
-                ? `$${currentPackage.priceUsd.toFixed(2)} USD` 
-                : `${(currentPackage.priceUsd * EXCHANGE_RATE_VES).toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})} Bs`;
-
-            const message = `👋 *NUEVO PEDIDO - FLASH TOPUP*\n\n` +
-                `🎮 *ID Jugador:* ${playerId}\n` +
-                `💎 *Paquete:* ${currentPackage.title}\n` +
-                `💳 *Método de Pago:* ${currentPayment}\n` +
-                `💰 *Total a Pagar:* ${totalAmount}\n\n` +
-                `_Hola, ya realicé el pago. Te adjunto la captura del comprobante para recibir mi recarga._`;
-
-            const encodedMessage = encodeURIComponent(message);
-            window.open(`https://wa.me/${584246041002}?text=${encodedMessage}`, '_blank');
-        }
-    </script>
-</body>
-</html>
+                <div class="flex justify-
