@@ -226,4 +226,191 @@
                     <span>Paquete:</span>
                     <span id="summaryPackage" class="text-white font-bold">No seleccionado</span>
                 </div>
-                <div class="flex justify-
+                <div class="flex justify-between text-slate-400">
+                    <span>Método Pago:</span>
+                    <span id="summaryPayment" class="text-white font-bold">No seleccionado</span>
+                </div>
+                <div class="flex justify-between text-slate-400 pt-2 border-t border-slate-800/50 text-base">
+                    <span class="font-bold text-white">Total USD:</span>
+                    <span id="summaryUsd" class="text-amber-500 font-extrabold">$0.00 USD</span>
+                </div>
+                <div class="flex justify-between text-slate-400 text-sm">
+                    <span class="font-bold text-slate-300">Total en Bs:</span>
+                    <span id="summaryVes" class="text-emerald-400 font-extrabold">0,00 Bs</span>
+                </div>
+            </div>
+
+            <!-- WhatsApp Order Button -->
+            <button onclick="sendOrder()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black py-4 rounded-xl shadow-lg glow-green transition flex items-center justify-center gap-2 text-base">
+                <i class="fa-brands fa-whatsapp text-xl"></i> ENVIAR PEDIDO Y CAPTURA POR WHATSAPP
+            </button>
+            <p class="text-[11px] text-slate-400 text-center mt-2 flex items-center justify-center gap-1">
+                <i class="fa-solid fa-paperclip text-amber-500"></i> Recuerda adjuntar tu comprobante de pago en el chat.
+            </p>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-gaming-card border-t border-slate-800 py-6 text-center text-xs text-slate-500 mt-auto">
+        <p>© 2026 Flash TopUp - Tienda no oficial de Free Fire. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // CONFIGURACIÓN DE TU NÚMERO DE WHATSAPP
+        const MY_PHONE_NUMBER = "584246041002"; 
+
+        // Tasa Oficial configurada
+        const EXCHANGE_RATE_VES = 882.00; 
+
+        // DATOS DE PAGO REALES
+        const PAGO_MOVIL_DATA = `
+            <p><span class="text-slate-500">Banco:</span> Banco de Venezuela (0102)</p>
+            <p><span class="text-slate-500">Cédula:</span> V-30.878.012</p>
+            <p><span class="text-slate-500">Teléfono:</span> 0424-6041002</p>
+        `;
+
+        const BINANCE_DATA = `
+            <p><span class="text-slate-500">Binance Pay ID / UID:</span> 920153175</p>
+        `;
+
+        let currentPackage = null;
+        let currentPayment = null;
+
+        // Initialize prices on page load
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById('rateBadge').innerText = `${EXCHANGE_RATE_VES.toFixed(2)} Bs / $`;
+            
+            document.querySelectorAll('.price-ves').forEach(el => {
+                const usd = parseFloat(el.getAttribute('data-usd'));
+                const ves = usd * EXCHANGE_RATE_VES;
+                el.innerText = `${ves.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})} Bs`;
+            });
+        });
+
+        function verifyId() {
+            const idInput = document.getElementById('playerId').value.trim();
+            const status = document.getElementById('idStatus');
+            const summaryId = document.getElementById('summaryId');
+
+            if (idInput.length < 6) {
+                status.className = 'text-xs mt-2 font-medium text-red-400';
+                status.innerText = '⚠️ Ingrese un ID válido de Free Fire (mínimo 6 dígitos).';
+                status.classList.remove('hidden');
+                summaryId.innerText = 'No ingresado';
+            } else {
+                status.className = 'text-xs mt-2 font-medium text-emerald-400';
+                status.innerText = '✓ ID Verificado Exitosamente';
+                status.classList.remove('hidden');
+                summaryId.innerText = idInput;
+
+                // Auto-scroll to Step 2
+                setTimeout(() => {
+                    document.getElementById('step2').scrollIntoView({ behavior: 'smooth' });
+                }, 300);
+            }
+        }
+
+        function selectPackage(element, id, priceUsd, title) {
+            document.querySelectorAll('.package-card').forEach(card => {
+                card.classList.remove('border-amber-500', 'bg-slate-800', 'glow-effect');
+                card.classList.add('border-slate-700/80', 'bg-slate-900/80');
+            });
+
+            element.classList.remove('border-slate-700/80', 'bg-slate-900/80');
+            element.classList.add('border-amber-500', 'bg-slate-800', 'glow-effect');
+
+            currentPackage = { id, priceUsd, title };
+            updateSummary();
+
+            // Auto-scroll to Step 3
+            setTimeout(() => {
+                document.getElementById('step3').scrollIntoView({ behavior: 'smooth' });
+            }, 300);
+        }
+
+        function selectPayment(element, method) {
+            document.querySelectorAll('.payment-card').forEach(card => {
+                card.classList.remove('border-amber-500', 'bg-slate-800');
+                card.classList.add('border-slate-700', 'bg-slate-900');
+            });
+
+            element.classList.remove('border-slate-700', 'bg-slate-900');
+            element.classList.add('border-amber-500', 'bg-slate-800');
+
+            currentPayment = method;
+            document.getElementById('summaryPayment').innerText = method;
+
+            // Show Payment Details Box
+            const detailsBox = document.getElementById('paymentDetails');
+            const detailsContent = document.getElementById('paymentDetailsContent');
+            detailsBox.classList.remove('hidden');
+
+            if (method === 'Pago Móvil') {
+                detailsContent.innerHTML = PAGO_MOVIL_DATA;
+            } else if (method === 'Binance Pay') {
+                detailsContent.innerHTML = BINANCE_DATA;
+            }
+
+            // Auto-scroll to Step 4
+            setTimeout(() => {
+                document.getElementById('step4').scrollIntoView({ behavior: 'smooth' });
+            }, 300);
+        }
+
+        function updateSummary() {
+            const summaryPackage = document.getElementById('summaryPackage');
+            const summaryUsd = document.getElementById('summaryUsd');
+            const summaryVes = document.getElementById('summaryVes');
+
+            if (!currentPackage) {
+                summaryPackage.innerText = 'No seleccionado';
+                summaryUsd.innerText = '$0.00 USD';
+                summaryVes.innerText = '0,00 Bs';
+                return;
+            }
+
+            summaryPackage.innerText = currentPackage.title;
+            summaryUsd.innerText = `$${currentPackage.priceUsd.toFixed(2)} USD`;
+            const ves = currentPackage.priceUsd * EXCHANGE_RATE_VES;
+            summaryVes.innerText = `${ves.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})} Bs`;
+        }
+
+        function sendOrder() {
+            const playerId = document.getElementById('playerId').value.trim();
+
+            if (!playerId || playerId.length < 6) {
+                alert('Por favor, ingresa y verifica tu ID de Jugador primero.');
+                document.getElementById('step1').scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+
+            if (!currentPackage) {
+                alert('Por favor, selecciona un paquete de diamantes.');
+                document.getElementById('step2').scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+
+            if (!currentPayment) {
+                alert('Por favor, selecciona un método de pago.');
+                document.getElementById('step3').scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+
+            const totalUsd = `$${currentPackage.priceUsd.toFixed(2)} USD`;
+            const totalVes = `${(currentPackage.priceUsd * EXCHANGE_RATE_VES).toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})} Bs`;
+
+            const message = `👋 *NUEVO PEDIDO - FLASH TOPUP*\n\n` +
+                `🎮 *ID Jugador:* ${playerId}\n` +
+                `💎 *Paquete:* ${currentPackage.title}\n` +
+                `💳 *Método de Pago:* ${currentPayment}\n` +
+                `💰 *Total a Pagar:* ${totalUsd} (${totalVes})\n\n` +
+                `_Hola, ya realicé el pago. Te adjunto la captura del comprobante para recibir mi recarga._`;
+
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/${MY_PHONE_NUMBER}?text=${encodedMessage}`, '_blank');
+        }
+    </script>
+</body>
+</html>
